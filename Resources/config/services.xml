@@ -18,8 +18,7 @@
 
         <service id="contentful.data_collector"
                  class="Contentful\ContentfulBundle\DataCollector\ContentfulDataCollector"
-                 public="false"
-        >
+                 public="false">
             <argument type="service" id="contentful.logger.array"/>
             <argument>%contentful.clients%</argument>
 
@@ -29,5 +28,10 @@
                  priority="250"
             />
         </service>
+
+        <service id="contentful.factory" class="Contentful\ClientFactory" public="false">
+            <argument type="service" id="contentful.logger.null"/>
+        </service>
+
     </services>
 </container>
