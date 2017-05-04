@@ -12,7 +12,7 @@
         <service id="contentful.logger.array" class="Contentful\Log\ArrayLogger" public="false"/>
 
         <service id="contentful.profiler_controller" class="Contentful\ContentfulBundle\Controller\ProfilerController">
-            <argument type="service" id="profiler"/>
+            <argument type="service" id="profiler" on-invalid="null"/>
             <argument type="service" id="templating"/>
         </service>
 
