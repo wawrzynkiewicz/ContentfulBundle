@@ -21,7 +21,12 @@ class ContentfulExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.xml');
+
+        if ($container->getParameter('kernel.environment') == 'dev') {
+            $loader->load('services_dev.xml');
+        } else {
+            $loader->load('services.xml');
+        }
 
         if (!empty($config['delivery'])) {
             $this->loadData('delivery', $config['delivery'], $container);
