@@ -7,6 +7,10 @@
     </parameters>
 
     <services>
+        <service id="contentful.upload.client" class="Contentful\Upload\Client">
+            <argument>%contentful.managment.token%</argument>
+            <argument>%contentful.managment.space_id%%</argument>
+        </service>
         <service id="contentful.logger.null" class="Contentful\Log\NullLogger" public="false"/>
 
         <service id="contentful.logger.array" class="Contentful\Log\ArrayLogger" public="false"/>

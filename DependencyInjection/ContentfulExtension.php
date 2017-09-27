@@ -6,6 +6,9 @@
 
 namespace Contentful\ContentfulBundle\DependencyInjection;
 
+use Contentful\Asset\Client as AssetClient;
+use Contentful\Upload\Client as UploadClient;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -35,6 +38,18 @@ class ContentfulExtension extends Extension
         if (!empty($config['management'])) {
             $this->loadData('management', $config['management'], $container);
         }
+
+        $container
+            ->register('contentful.upload.client', UploadClient::class)
+            ->addArgument('%contentful.managment.token%')
+            ->addArgument('%contentful.managment.space_id%')
+        ;
+
+        $container
+            ->register('contentful.asset.client', AssetClient::class)
+            ->addArgument('%contentful.managment.token%')
+            ->addArgument('%contentful.managment.space_id%')
+        ;
     }
 
     protected function loadData($type, array $config, ContainerBuilder $container)
