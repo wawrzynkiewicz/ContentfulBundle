@@ -2,11 +2,16 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
     <parameters>
         <parameter key="contentful.clients" type="collection"/>
     </parameters>
 
     <services>
+        <service id="contentful.upload.client" class="Contentful\Upload\Client">
+            <argument>%contentful.managment.token%</argument>
+            <argument>%contentful.managment.space_id%%</argument>
+        </service>
         <service id="contentful.logger.null" class="Contentful\Log\NullLogger" public="false"/>
 
         <service id="contentful.logger.array" class="Contentful\Log\ArrayLogger" public="false"/>
@@ -27,6 +32,5 @@
         <service id="contentful.factory" class="Contentful\ClientFactory" public="false">
             <argument type="service" id="contentful.logger.null"/>
         </service>
-
     </services>
 </container>
